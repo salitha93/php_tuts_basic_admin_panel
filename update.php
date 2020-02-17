@@ -8,18 +8,43 @@ include 'connection.php';
   $email = $_POST['email'];
   $position = $_POST['position'];
   $pass = 'abc123';
+  $row["uname"] = '';
+  $row["fname"] = '';
+  $row["lname"] = '';
+  $row["email"] = '';
+
+if($_POST['load'])
+{
+	if($query0 = mysqli_query($conn, "SELECT * FROM data WHERE uname = '$uname'"))
+	{
+		if(($row=mysqli_fetch_array($query0)))
+		{
+			
+		}
+		else
+		{
+			echo "Username is invalid.";
+		}
+	}
+	else
+	{
+		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	}
+}
+
   
-if($_POST['submit']){
+if($_POST['update']){
  	// insert into tableName (feilds) values (variables) If still you cant understand please check videos on my youtube channel NOSGENE or comment there so i can help you
  
 	//Validate user name availability
 	if($query0 = mysqli_query($conn, "SELECT * FROM data WHERE uname = '$uname'"))
 	{
 	
-		if(($row=mysqli_fetch_array($query0)))
+		if(($row1=mysqli_fetch_array($query0)))
 		{
-			$sql = "INSERT INTO data (uname,fname,lname,email,position,pass)
-			VALUES ('$uname', '$fname', '$lname', '$email', $position, '$pass')";
+			$sql = "UPDATE data 
+			SET fname = '$fname', lname = '$lname', email = '$email'
+			WHERE uname = '$uname'";
 
 			if (mysqli_query($conn, $sql)) 
 			{
@@ -32,7 +57,7 @@ if($_POST['submit']){
 		}
 		else
 		{
-			echo "Username already exist.";
+			echo "Username is invalid.";
 		}
 	}
 	else
@@ -49,19 +74,21 @@ if($_POST['submit']){
 
 <body>
    
-	<h2>Register User</h2>
-		<form action="add.php" method="POST">
-			Username: <input type="text" name="uname" value="" required><br><br>
-			First Name: <input type="text" name="fname" value="" required><br><br>
-			Last Name: <input type="text" name="lname" value="" required><br><br>
-			Email: <input type="email" name="email" value="" required><br><br>
+	<h2>Update User Data</h2>
+		<form action="update.php" method="POST">
+			Username: <input type="text" name="uname" value="<?php echo $row["uname"] ?>" required><br><br>
+			First Name: <input type="text" name="fname" value="<?php echo $row["fname"] ?>" ><br><br>
+			Last Name: <input type="text" name="lname" value="<?php echo $row["lname"] ?>" ><br><br>
+			Email: <input type="email" name="email" value="<?php echo $row["email"] ?>" ><br><br>
 			Position: <select name="position">
 						<option value="teacher">Teacher</option>
 						<option value="vice-principal">vice-principal</option>
 						<option value="principal">principal</option>
 					  </select><br><br>
 	<br>
-			<input type="submit" name="submit" value="Register"/></center>
+			<input type="submit" name="update" value="Update"/></center>
+	<br>
+			<input type="submit" name="load" value="Load"/></center>
 </body>
 
 <!--
