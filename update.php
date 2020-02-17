@@ -43,12 +43,12 @@ if($_POST['update']){
 		if(($row1=mysqli_fetch_array($query0)))
 		{
 			$sql = "UPDATE data 
-			SET fname = '$fname', lname = '$lname', email = '$email'
+			SET fname = '$fname', lname = '$lname', email = '$email', position = '$position'
 			WHERE uname = '$uname'";
 
 			if (mysqli_query($conn, $sql)) 
 			{
-				echo "<h1><center>New record created successfully</center></h1>";
+				echo "<h1><center>$uname is updated successfully</center></h1>";
 			} 
 			else 
 			{
