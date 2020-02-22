@@ -81,9 +81,9 @@ if($_POST['update']){
 			Last Name: <input type="text" name="lname" value="<?php echo $row["lname"] ?>" ><br><br>
 			Email: <input type="email" name="email" value="<?php echo $row["email"] ?>" ><br><br>
 			Position: <select name="position">
-						<option value="teacher">Teacher</option>
-						<option value="vice-principal">vice-principal</option>
-						<option value="principal">principal</option>
+						<option value="teacher" <?php if ( $row["position"] == 'teacher' ) echo 'selected = "selected"'; ?>>teacher</option>
+						<option value="vice-principal" <?php if ( $row["position"] == 'vice-principal' ) echo 'selected = "selected"'; ?>>vice-principal</option>
+						<option value="principal" <?php if ( $row["position"] == 'principal' ) echo 'selected = "selected"'; ?>>principal</option>
 					  </select><br><br>
 	<br>
 			<input type="submit" name="update" value="Update"/></center>
