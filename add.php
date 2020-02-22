@@ -19,7 +19,7 @@ if($_POST['submit']){
 		if(!($row=mysqli_fetch_array($query0)))
 		{
 			$sql = "INSERT INTO data (uname,fname,lname,email,position,pass)
-			VALUES ('$uname', '$fname', '$lname', '$email', $position, '$pass')";
+			VALUES ('$uname', '$fname', '$lname', '$email', '$position', '$pass')";
 
 			if (mysqli_query($conn, $sql)) 
 			{
